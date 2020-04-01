@@ -28,6 +28,7 @@ async function run() {
     const autoMergeStringInput = core.getInput("auto_merge", {
       required: false
     });
+    const payload = core.getInput("payload", { required: false }) || "";
 
     const auto_merge: boolean = autoMergeStringInput === "true";
 
@@ -41,6 +42,7 @@ async function run() {
       environment,
       transient_environment: true,
       auto_merge,
+      payload: payload,
       description
     });
 
