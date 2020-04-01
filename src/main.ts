@@ -55,6 +55,7 @@ async function run() {
     });
 
     core.debug("payload: " + payload)
+    core.setOutput("payload", payload)
     core.setOutput("deployment_id", deployment.data.id.toString());
   } catch (error) {
     core.error(error);
