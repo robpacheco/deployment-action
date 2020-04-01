@@ -54,6 +54,7 @@ async function run() {
       environment_url: url
     });
 
+    core.debug("payload: " + payload)
     core.setOutput("deployment_id", deployment.data.id.toString());
   } catch (error) {
     core.error(error);
