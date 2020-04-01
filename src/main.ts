@@ -34,6 +34,8 @@ async function run() {
 
     const client = new github.GitHub(token, { previews: ["flash", "ant-man"] });
 
+    core.debug("starting deployment")
+
     const deployment = await client.repos.createDeployment({
       owner: context.repo.owner,
       repo: context.repo.repo,
@@ -45,6 +47,8 @@ async function run() {
       payload: payload,
       description
     });
+
+    core.debug("starting status update")
 
     await client.repos.createDeploymentStatus({
       ...context.repo,
