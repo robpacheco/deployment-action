@@ -3220,9 +3220,9 @@ function run() {
                 required: false
             });
             const payload = core.getInput("payload", { required: false }) || "";
+            const task = core.getInput("task", { required: false }) || "";
             const auto_merge = autoMergeStringInput === "true";
             const client = new github.GitHub(token, { previews: ["flash", "ant-man"] });
-            core.debug("starting deployment");
             const deployment = yield client.repos.createDeployment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
@@ -3232,12 +3232,10 @@ function run() {
                 transient_environment: true,
                 auto_merge,
                 payload: payload,
+                task: task,
                 description
             });
-            core.debug("starting status update");
             yield client.repos.createDeploymentStatus(Object.assign({}, context.repo, { deployment_id: deployment.data.id, state: initialStatus, log_url: logUrl, environment_url: url }));
-            core.debug("payload: " + payload);
-            core.setOutput("payload", payload);
             core.setOutput("deployment_id", deployment.data.id.toString());
         }
         catch (error) {

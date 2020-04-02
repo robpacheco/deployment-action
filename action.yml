@@ -33,6 +33,10 @@ inputs:
     description: "Sets the payload for the deployment"
     default: ""
     required: false
+  task:
+    description: "Sets the task for the deployment"
+    default: ""
+    required: false
 outputs:
   deployment_id:
     description: "The ID of the created deployment"
